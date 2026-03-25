@@ -13,7 +13,7 @@ It is a collection of interconnected, standalone modules built on top of the [RS
 
 Every module in follows the same principles:
 
-**1. Zero core edits**
+**1. Avoiding core edits**
 Minimal RSGCore files are modified. Almost all integration happens through exports, events, and RSGCore's existing API.
 
 **2. Modular and standalone**
