@@ -66,7 +66,7 @@ Players purchase building plans from Housing Agent NPCs, choose a location anywh
 - Cooperative building — owner shares keys with other players who can contribute materials
 - Construction site container — ghost prop accepts material deposits, progress bar fills to 100%
 - At 100% completion, prop becomes solid and storage/addons unlock
-- Automatic vegetation removal in 30m radius around placed houses
+- Automatic vegetation removal in 10m radius around placed houses
 - Property storage (capacity scales with house tier)
 - Key management — give/revoke access to any player
 - Ownership transfer between players
@@ -74,13 +74,13 @@ Players purchase building plans from Housing Agent NPCs, choose a location anywh
 - Abandoned properties visible on map, repossessed after inactivity
 
 **House tiers:**
-- Small Cabin — basic shelter, low tax, limited storage
-- Medium Cabin — comfortable homestead, moderate requirements
-- Ranch House — large property, heavy material requirements, farming/ranching addon support
+- Small Cabin — basic shelter, low tax, limited storage (planned)
+- Medium Cabin — comfortable homestead, moderate requirements (planned)
+- Wooden House — larger sized house with several rooms.
 
 **Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`, `ox_target`, `rsg-inventory`
 
-**Optional:** `st-status` (gates land ownership for Immigrants until milestone reached)
+**Optional:** `st-status` (gates land ownership for Immigrants until milestone reached) - not yet implemented
 
 ---
 
