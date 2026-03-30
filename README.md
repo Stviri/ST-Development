@@ -95,29 +95,6 @@ fiber    (harvested)→ rope      (by hand)     → used in st-housing construct
 ### [st-reputation] *(planned)*
 
 
-
-## Roadmap
-
-```
-Phase 1 — Identity Layer          [Complete]
-  └── st-status
-
-Phase 2 — Property Layer          [In Development]
-  └── st-housing
-
-Phase 3 — Production Layer        [Planned]
-  ├── st-farming
-  ├── st-ranching
-  └── st-crafting
-
-Phase 4 — Social Layer            [Planned]
-  ├── st-jobs
-  └── st-reputation
-
-Phase 5 — Economy Layer           [Planned]
-  └── st-economy
-```
-
 ---
 
 
