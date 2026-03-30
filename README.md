@@ -32,29 +32,6 @@ Most modules will be open source and free to use, fork, and adapt. If you run RS
 
 ## Modules
 
-### [st-status](https://github.com/Stviri/st-status)
-> Character status selection on first spawn
-
-The first thing a new player does is choose who they are. Status is a permanent character attribute that defines starting conditions, economic modifiers, and long-term gameplay paths.
-
-| Status | Starting Conditions | Advantages | Disadvantages |
-|--------|-------------------|------------|---------------|
-| **Immigrant** | No money, no items | Slower hunger drain, cheaper crafting (-20%) | Expensive shops (+20%), no reputation |
-| **Local** | $50 cash + knife | Trusted reputation (+100), normal shop prices | Expensive crafting (+10%) |
-| **Drifter** | Knife only | No job change cooldown, neutral reputation | Suspicious to NPCs, slightly pricier shops (+10%) |
-
-**Features:**
-- Status selection menu appears on first spawn with full pros/cons display
-- Player is locked (frozen, controls disabled) during selection — cannot skip
-- Server-side validation prevents reselection after first choice
-- Inventory wipe and status-appropriate items applied on selection
-- Stored in RSGCore player metadata as `playerstatus`
-- Compatible with all RSGCore resources via `Player.Functions.GetMetaData('playerstatus')`
-
-**Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`, `rsg-inventory`, `rsg-multicharacter`
-
----
-
 ### [st-housing] *(in development)*
 > Player-built, persistent housing with cooperative construction
 
@@ -83,101 +60,7 @@ Players purchase building plans from Housing Agent NPCs, choose a location anywh
 **Optional:** `st-status` (gates land ownership for Immigrants until milestone reached) - not yet implemented
 
 ---
-
-### [st-jobs] *(planned)*
-> Status-aware job application system with cooldowns and reputation gates
-
-RSGCore has no built-in job application system. `st-jobs` provides a town hall NPC interface where players apply for jobs, with requirements gated by status and reputation. Drifters bypass cooldowns as their core perk.
-
-**Features:**
-- Town hall NPCs in each major settlement where players browse and apply for jobs
-- Jobs gated by `playerstatus` — certain jobs require Local status or specific reputation
-- Job change cooldown (24 hours for Immigrant/Local, no cooldown for Drifter)
-- Full job history tracked in dedicated `st_job_history` table — never touches RSGCore tables
-- Uses `Player.Functions.SetJob()` to assign — zero core edits
-- Reputation requirements per job (Lawman requires positive rep, some outlaw jobs require negative)
-
-**Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`, `ox_target`
-
-**Optional:** `st-status` (for cooldown and gate logic), `st-reputation` (for rep requirements)
-
----
-
-### [st-farming] *(planned)*
-> Plot-based crop farming tied to housing system
-
-Players with a property can cultivate crop plots on their land. Farming is the primary food production system for the server — raw ingredients flow into the player economy from here.
-
-**Features:**
-- Crop plots purchasable as housing addons (requires completed `st-housing` property)
-- Plant seeds → water → tend → harvest cycle
-- Session-aware timing — crops progress on real time, not session time (2-3 hour sessions are viable)
-- Solo farming is possible but slow — group effort multiplies yield
-- Raw crop output feeds into crafting and cooking systems
-- Seasonal crop availability (some crops only in certain months)
-- Crop decay if untended too long
-
-**Crops (planned):** Corn, wheat, potatoes, tobacco, cotton, herbs
-
-**Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`, `ox_target`, `rsg-inventory`, `st-housing`
-
----
-
-### [st-ranching] *(planned)*
-> Livestock management tied to housing system
-
-Players with a ranch house property can raise, tend, breed, and sell livestock. Ranching is the primary source of meat, milk, wool, and leather in the player economy.
-
-**Features:**
-- Animal pens purchasable as ranch house addons
-- Livestock types: cattle, sheep, pigs, chickens
-- Daily feeding, health management, breeding cycles
-- Produce collection: milk (cattle), eggs (chickens), wool (sheep)
-- Slaughter for meat and hide
-- Animal market — buy starter livestock from NPC, sell surplus to players or NPC buyers
-- Solo ranching is hard — designed for 2-3 player cooperation
-- Animals can die from neglect
-
-**Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`, `ox_target`, `rsg-inventory`, `st-housing`
-
----
-
-### [st-reputation] *(planned)*
-> Server-wide reputation system with faction tracking
-
-RSGCore has a reputation field but no behavior attached to it. `st-reputation` defines what reputation means, how it changes, and what it affects.
-
-**Features:**
-- Global reputation score per character (tracked separately from RSGCore's `rep` field)
-- Reputation events: completing jobs, criminal activity, helping NPCs, paying taxes, business dealings
-- Faction reputation: separate scores for each major settlement (Valentine, Rhodes, Saint Denis, etc.)
-- Reputation effects: shop price modifiers, NPC dialog changes, access to certain jobs and areas
-- Outlaw status threshold — above a certain negative rep, bounties become active
-- Public reputation display for roleplay purposes
-- Hooks for other `st-*` modules to add/remove reputation via exports
-
-**Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`
-
----
-
-### [st-economy] *(planned)*
-> Dynamic market system bridging player production and consumption
-
-The economy layer that connects all production systems (farming, ranching, hunting, mining) with consumption (food, crafting, construction). Prices respond to supply and demand with NPC buyers providing a price floor.
-
-**Features:**
-- Player market — list items for sale at chosen price, other players buy
-- NPC market — fallback buyers for all raw materials at fixed lower prices
-- Price history tracking — visible market trends
-- Town treasury — tax revenue funds infrastructure upgrades
-- Transitional phases — as player economy matures, NPC dependency decreases
-- Anti-monopoly mechanics — position limits per item category
-
-**Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`, `rsg-inventory`
-
----
-
-### [st-crafting] *(planned)*
+### [st-crafting] *(in development)*
 > Workbench and blacksmith crafting for building materials and tools
 
 A dedicated crafting system for processing raw materials into construction materials, tools, and equipment. Works independently of camp-based cooking.
@@ -199,6 +82,19 @@ fiber    (harvested)→ rope      (by hand)     → used in st-housing construct
 **Dependencies:** `rsg-core`, `ox_lib`, `oxmysql`, `rsg-inventory`
 
 ---
+### [st-lumberjack] *(in development)*
+
+### [st-mining] *(planned)*
+
+### [st-jobs] *(planned)*
+
+### [st-farming] *(planned)*
+
+### [st-ranching] *(planned)*
+
+### [st-reputation] *(planned)*
+
+
 
 ## Roadmap
 
@@ -224,35 +120,6 @@ Phase 5 — Economy Layer           [Planned]
 
 ---
 
-## Dependency Map
-
-```
-st-status
-    └── feeds into → st-jobs (status gates)
-    └── feeds into → st-housing (immigrant milestone gate)
-    └── feeds into → st-reputation (starting rep values)
-
-st-housing
-    └── enables → st-farming (crop plots addon)
-    └── enables → st-ranching (animal pens addon)
-
-st-reputation
-    └── feeds into → st-jobs (rep requirements)
-    └── feeds into → st-economy (shop price modifiers)
-
-st-crafting
-    └── feeds into → st-housing (construction materials)
-    └── feeds into → st-farming (tools)
-    └── feeds into → st-ranching (tools)
-
-st-farming + st-ranching + hunting (existing)
-    └── feeds into → st-economy (supply)
-
-st-economy
-    └── feeds into → everything (demand and pricing)
-```
-
----
 
 ## Installation
 
