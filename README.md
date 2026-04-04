@@ -19,9 +19,7 @@ Most modules will be open source and free to use, fork, and adapt. If you run RS
 ## Modules
 
 ### [st-housing](https://github.com/Stviri/st-housing)
-> Player-built, persistent housing with cooperative construction
-
-Players purchase building plans from Housing Agent NPCs, choose a location anywhere on the map, and physically construct their home by gathering and depositing crafting materials. Houses are persistent world objects — they stay in the world when the owner logs off.
+> Player-built, persistent housing system. Players purchase building plans from Housing Agent NPCs, choose a location anywhere on the map, and physically construct their home by gathering and depositing crafting materials. Houses are persistent world objects — they stay in the world when the owner logs off.
 ---
 ### [st-crafting](https://github.com/Stviri/st-crafting)
 > Workbench, blacksmith and gunsmith crafting systen for building materials, tools and guns.
