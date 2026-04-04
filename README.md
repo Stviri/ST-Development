@@ -1,5 +1,7 @@
 # ST-Development
 
+PROJECT IS IN ALPHA, EXPECT ISSUES/BUGS.
+
 > A modular, roleplay systems built for RedM — designed on RSG RedM Framework.
 
 ---
